@@ -1,0 +1,11 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "Symlink compile_commands.json to workspace root",
+			"command": "ln -sf build/compile_commands.json compile_commands.json",
+			"group": "build"
+		}
+	]
+}
