@@ -16,7 +16,8 @@
 		"vscode": {
 			"extensions": [
 				"llvm-vs-code-extensions.vscode-clangd",
-				"twxs.cmake"
+				"twxs.cmake",
+				"vadimcn.vscode-lldb"
 			]
 		}
 	}

@@ -16,11 +16,11 @@ class SafeNumber{
         auto operator<=>(const SafeNumber&) const = default;
 
         SafeNumber operator*(SafeNumber other_number){
-            if (number>biggest_value/other_number.number){
+            if (other_number.number!=0 and number>biggest_value/other_number.number){
                 throw overflow_error(format("Overflow happend, numerical_limit={}<{}*{}",
                     biggest_value, number, other_number.number));
             }
-            return number*other_number.number; 
+            return SafeNumber(number*other_number.number); 
         }
 
         SafeNumber operator+(SafeNumber other_number){
@@ -28,7 +28,7 @@ class SafeNumber{
                 throw overflow_error(format("Overflow happend, numerical_limit={}<{}+{}",
                     biggest_value, number, other_number.number));
             }
-            return number+other_number.number; 
+            return SafeNumber(number+other_number.number); 
         }
 
         SafeNumber operator-(SafeNumber other_number){
@@ -36,8 +36,16 @@ class SafeNumber{
                 throw overflow_error(format("Underflow happend, numerical_limit={}>{}-{}",
                 smallest_value, number, other_number.number));
             }
-            return other_number.number-number;
+            return SafeNumber(number-other_number.number);
         }
 
+    friend struct std::formatter<SafeNumber<NumberType>>; 
+};
 
+
+template <unsigned_integral NumberType>
+struct std::formatter<SafeNumber<NumberType>> : std::formatter<NumberType> {
+    auto format(const SafeNumber<NumberType>& sn, auto& ctx) const {
+        return std::formatter<NumberType>::format(sn.number, ctx);
+    }
 };
