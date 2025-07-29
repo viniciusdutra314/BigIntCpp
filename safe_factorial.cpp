@@ -54,4 +54,4 @@ int main(){
         default:
             println("Invalid number of bits");
     }
-}
+} 

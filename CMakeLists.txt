@@ -9,3 +9,4 @@ set(CMAKE_BUILD_TYPE "Debug")
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_executable(safe_factorial safe_factorial.cpp)
+add_executable(teste teste.cpp)

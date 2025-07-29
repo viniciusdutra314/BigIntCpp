@@ -45,7 +45,7 @@ class SafeNumber{
 
 template <unsigned_integral NumberType>
 struct std::formatter<SafeNumber<NumberType>> : std::formatter<NumberType> {
-    auto format(const SafeNumber<NumberType>& sn, auto& ctx) const {
-        return std::formatter<NumberType>::format(sn.number, ctx);
+    auto format(const SafeNumber<NumberType>& number, auto& ctx) const {
+        return std::formatter<NumberType>::format(number.number, ctx);
     }
 };
