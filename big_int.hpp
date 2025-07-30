@@ -1,61 +1,56 @@
-#include <algorithm>
 #include <cctype>
+#include <cmath>
 #include <cstdint>
-#include <format>
-#include <numeric>
 #include <ranges>
-#include <stdexcept>
-#include <string>
 #include <string_view>
 #include <vector>
 using namespace std;
 using namespace std::views;
-using namespace std::ranges;
-namespace ranges = std::ranges;
-namespace views = std::ranges::views;
 
 class BigInteger {
-  vector<uint64_t> digits;
-  bool is_negative;
+private:
+  vector<uint32_t> digits;
+  bool is_positive;
 
-public:
   BigInteger(const string_view numerical_str) {
-    // get the least significant digits first
-    auto reverse_numerical_str = views::reverse(numerical_str);
-
-    // Remove leading spaces
-    auto is_empty_space = [](char c) { return isspace(c); };
-    auto trimmed_str = reverse_numerical_str | drop_while(is_empty_space);
-    if (trimmed_str.empty()) {
-      throw std::invalid_argument(
-          "Input string is empty or only contains spaces.");
-    }
-
-    // finds the sign
-    auto first_character = trimmed_str.front();
-    if (first_character == '-' or first_character == '+' or
-        isdigit(first_character)) {
-      is_negative = (first_character == '-');
-    } else {
-      throw invalid_argument(
-          "First non-empty character should be one of this (0-9 | + | - )");
-    }
-
-    // takes the numerical part
+    is_positive=true;
     auto is_numerical = [](char c) { return isdigit(c); };
-    auto characters_to_jump = isdigit(first_character) ? 0 : 1;
-    auto numerical_part =
-        trimmed_str | drop(characters_to_jump) | take_while(is_numerical);
+    // get the least significant digits first
+    auto reverse_numerical_str =reverse(numerical_str) | filter(is_numerical);
 
-    // divides into chuncks
-    auto chuncked_digits = numerical_part | chunk(3);
-    auto chars_to_a_number = [](uint64_t accumulator, char digit) {
-      return accumulator * 10 + (digit - '0');
-    };
-    ranges::transform(chuncked_digits, std::back_inserter(digits),
-                      [chars_to_a_number](auto chunk) {
-                        return ranges::fold_left(chunk, 0, chars_to_a_number);
-                      });
+    // divides into chuncks of 9 numbers
+    auto chuncked_digits = reverse_numerical_str | chunk(9);
+    for (auto chunck : chuncked_digits) {
+      uint32_t digit = 0;
+      for (auto [potencia, number_char] : enumerate(chunck)) {
+        digit += pow(10, potencia) * (number_char-'0');
+      }
+      digits.push_back(digit);
+    }
   }
-  vector<uint64_t> const &get_digits() const { return digits; }
+  friend BigInteger operator""_bigint(const char *raw_number);
+public:
+  //Comparações
+  bool operator==(const BigInteger& other) const {
+    return is_positive == other.is_positive and digits == other.digits;
+  }
+
+
+
+  BigInteger operator-() const {
+    BigInteger new_number = *this;
+    new_number.is_positive = false;
+    return new_number;
+  }
+
+  BigInteger operator+() const {
+    return *this;
+  }
+
+
+  vector<uint32_t> const &get_digits() const { return digits; }
 };
+
+BigInteger operator""_bigint(const char *raw_number) {
+  return BigInteger(raw_number);
+}
