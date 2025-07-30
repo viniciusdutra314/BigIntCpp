@@ -1,7 +1,6 @@
 #include "safe_number.hpp"
 #include <cassert>
 #include <cstdint>
-#include <exception>
 #include <iostream>
 #include <print>
 #include <cstring>

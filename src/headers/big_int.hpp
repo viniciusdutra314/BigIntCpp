@@ -8,7 +8,7 @@
 #include <vector>
 using namespace std;
 using namespace std::views;
-using namespace std::ranges;
+namespace views =std::views;
 
 class BigInteger {
 private:
@@ -20,7 +20,7 @@ private:
     is_positive = true;
     auto is_numerical = [](char c) { return isdigit(c); };
     for (auto chunck_8_digits :
-         reverse(numerical_str) | filter(is_numerical) | chunk(8)) {
+         views::reverse(numerical_str) | filter(is_numerical) | chunk(8)) {
       digits.push_back(stol(to<string>(chunck_8_digits)));
     }
   }
@@ -46,7 +46,7 @@ public:
                  : std::strong_ordering::less;
 
     // Compara digito a digito do mais significante ao menos
-    for (auto [digit_a, digit_b] : reverse(zip(digits, other.digits))) {
+    for (auto [digit_a, digit_b] : views::reverse(zip(digits, other.digits))) {
       if (digit_a != digit_b)
         return (digit_a > digit_b) == is_positive ? std::strong_ordering::greater
                                       : std::strong_ordering::less;

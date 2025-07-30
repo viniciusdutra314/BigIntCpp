@@ -1,0 +1,21 @@
+#include <gtest/gtest.h>
+#include "big_int.hpp"
+
+TEST(BigInt,Comparisions){
+    //Igualdade
+    EXPECT_EQ(123_bigint,123_bigint);
+    EXPECT_NE(123_bigint,-123_bigint);
+    EXPECT_NE(1385138'1385138'1385138'1385138'1385138'1385138'1385138_bigint,
+        1385138'1385138'1385138'1345138'1385138'1385138'1385138_bigint);
+
+    //Comparações;
+    EXPECT_TRUE(200_bigint>100_bigint);
+    EXPECT_TRUE(200_bigint>=100_bigint);
+    EXPECT_TRUE(-200_bigint<100_bigint);
+    EXPECT_TRUE(-200_bigint<=100_bigint);
+    EXPECT_TRUE(1000000000'00000000000000000_bigint>=100_bigint);
+    EXPECT_TRUE(100_bigint<=1000000000'00000000000000000_bigint);
+    EXPECT_TRUE(100_bigint>=-1000000000'00000000000000000_bigint);
+    EXPECT_TRUE(1385138'1385138'1385138'1385138'1385138'1385138'1385138_bigint>
+        1385138'1385138'1385138'1345138'1385138'1385138'1385138_bigint);
+}
