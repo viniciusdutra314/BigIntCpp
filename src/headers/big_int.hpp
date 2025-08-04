@@ -1,36 +1,46 @@
+#include <algorithm>
 #include <cctype>
 #include <cmath>
 #include <compare>
 #include <cstdint>
+#include <execution>
+#include <numeric>
 #include <ranges>
 #include <string>
 #include <string_view>
 #include <vector>
 using namespace std;
 using namespace std::views;
-namespace views =std::views;
+namespace views = std::views;
 
 class BigInteger {
 private:
   vector<uint32_t> digits;
-  bool is_positive=true;
+  bool is_positive = true;
+  static constexpr array<uint32_t, 8> powers_10 = {
+      1, 10, 100, 1'000, 10'000, 100'000, 1'000'000, 10'000'000};
+  // Construtor
+public:
+  BigInteger(string_view numerical_str) {
+    auto char_to_number = [](char character) { return character - '0'; };
 
-  //Construtor
-  BigInteger(const string_view numerical_str) {
-    size_t num_elements=ceil(numerical_str.length()/8.0f);
-    digits.resize(num_elements);
-    for (auto&& [digit,numbers_chunk] : zip(digits,numerical_str | views::reverse | chunk(8))) {
-      digit=0;
-      for (auto [exponent,character] : enumerate(numbers_chunk))
-        digit+=pow(10,exponent)*(character-'0');
-    }
+    auto chunks = views::reverse(numerical_str) |
+                  views::transform(char_to_number) | chunk(8);
+    digits.resize(chunks.size());
+
+    auto func_chunk_to_digit = [&](auto characters) {
+      return inner_product(characters.begin(), characters.end(),
+                           powers_10.begin(), 0);
+    };
+
+    std::transform(chunks.begin(), chunks.end(), digits.begin(),
+                   func_chunk_to_digit);
   }
   friend BigInteger operator""_bigint(const char *raw_number);
 
-public:
-  //Igualdade
-  bool operator==(const BigInteger &other) const{
-    return is_positive==other.is_positive and digits==other.digits;
+  // Igualdade
+  bool operator==(const BigInteger &other) const {
+    return is_positive == other.is_positive and digits == other.digits;
   }
 
   // Comparações
@@ -49,8 +59,9 @@ public:
     // Compara digito a digito do mais significante ao menos
     for (auto [digit_a, digit_b] : views::reverse(zip(digits, other.digits))) {
       if (digit_a != digit_b)
-        return (digit_a > digit_b) == is_positive ? std::strong_ordering::greater
-                                      : std::strong_ordering::less;
+        return (digit_a > digit_b) == is_positive
+                   ? std::strong_ordering::greater
+                   : std::strong_ordering::less;
     }
 
     // Números são iguais
@@ -59,7 +70,7 @@ public:
 
   BigInteger operator-() const {
     BigInteger new_number = *this;
-    new_number.is_positive = false;
+    new_number.is_positive = !is_positive;
     return new_number;
   }
 
@@ -71,3 +82,4 @@ public:
 BigInteger operator""_bigint(const char *raw_number) {
   return BigInteger(raw_number);
 }
+

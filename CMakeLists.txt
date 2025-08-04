@@ -4,7 +4,7 @@ project(BigIntCpp)
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_BUILD_TYPE "Debug")
+set(CMAKE_BUILD_TYPE "Release")
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 include_directories(src/headers)
@@ -35,3 +35,9 @@ target_link_libraries(
 
 include(GoogleTest)
 gtest_discover_tests(unit_tests)
+
+
+##benchmarks C/C++
+find_package(benchmark REQUIRED)
+add_executable(benchmarks benchmarks/main.cpp)
+target_link_libraries(benchmarks benchmark::benchmark)
