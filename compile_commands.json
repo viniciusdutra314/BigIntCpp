@@ -1,1 +1,44 @@
-build/compile_commands.json
+[
+{
+  "directory": "/workspaces/BigIntCpp",
+  "command": "/usr/bin/c++  -I/workspaces/BigIntCpp/src/headers -g -std=gnu++23 -o CMakeFiles/safe_factorial.dir/src/safe_factorial.cpp.o -c /workspaces/BigIntCpp/src/safe_factorial.cpp",
+  "file": "/workspaces/BigIntCpp/src/safe_factorial.cpp",
+  "output": "CMakeFiles/safe_factorial.dir/src/safe_factorial.cpp.o"
+},
+{
+  "directory": "/workspaces/BigIntCpp",
+  "command": "/usr/bin/c++  -I/workspaces/BigIntCpp/src/headers -g -std=gnu++23 -o CMakeFiles/teste.dir/src/teste.cpp.o -c /workspaces/BigIntCpp/src/teste.cpp",
+  "file": "/workspaces/BigIntCpp/src/teste.cpp",
+  "output": "CMakeFiles/teste.dir/src/teste.cpp.o"
+},
+{
+  "directory": "/workspaces/BigIntCpp",
+  "command": "/usr/bin/c++  -I/workspaces/BigIntCpp/src/headers -isystem /workspaces/BigIntCpp/_deps/googletest-src/googletest/include -isystem /workspaces/BigIntCpp/_deps/googletest-src/googletest -g -std=gnu++23 -o CMakeFiles/unit_tests.dir/tests/tests_bigint.cpp.o -c /workspaces/BigIntCpp/tests/tests_bigint.cpp",
+  "file": "/workspaces/BigIntCpp/tests/tests_bigint.cpp",
+  "output": "CMakeFiles/unit_tests.dir/tests/tests_bigint.cpp.o"
+},
+{
+  "directory": "/workspaces/BigIntCpp/_deps/googletest-build/googlemock",
+  "command": "/usr/bin/c++  -I/workspaces/BigIntCpp/src/headers -I/workspaces/BigIntCpp/_deps/googletest-src/googlemock/include -I/workspaces/BigIntCpp/_deps/googletest-src/googlemock -isystem /workspaces/BigIntCpp/_deps/googletest-src/googletest/include -isystem /workspaces/BigIntCpp/_deps/googletest-src/googletest -g -std=c++23 -Wall -Wshadow -Wconversion -DGTEST_HAS_PTHREAD=1 -fexceptions -W -Wpointer-arith -Wreturn-type -Wcast-qual -Wwrite-strings -Wswitch -Wunused-parameter -Wcast-align -Wchar-subscripts -Winline -Wredundant-decls -o CMakeFiles/gmock.dir/src/gmock-all.cc.o -c /workspaces/BigIntCpp/_deps/googletest-src/googlemock/src/gmock-all.cc",
+  "file": "/workspaces/BigIntCpp/_deps/googletest-src/googlemock/src/gmock-all.cc",
+  "output": "_deps/googletest-build/googlemock/CMakeFiles/gmock.dir/src/gmock-all.cc.o"
+},
+{
+  "directory": "/workspaces/BigIntCpp/_deps/googletest-build/googlemock",
+  "command": "/usr/bin/c++  -I/workspaces/BigIntCpp/src/headers -isystem /workspaces/BigIntCpp/_deps/googletest-src/googlemock/include -isystem /workspaces/BigIntCpp/_deps/googletest-src/googlemock -isystem /workspaces/BigIntCpp/_deps/googletest-src/googletest/include -isystem /workspaces/BigIntCpp/_deps/googletest-src/googletest -g -std=c++23 -Wall -Wshadow -Wconversion -DGTEST_HAS_PTHREAD=1 -fexceptions -W -Wpointer-arith -Wreturn-type -Wcast-qual -Wwrite-strings -Wswitch -Wunused-parameter -Wcast-align -Wchar-subscripts -Winline -Wredundant-decls -o CMakeFiles/gmock_main.dir/src/gmock_main.cc.o -c /workspaces/BigIntCpp/_deps/googletest-src/googlemock/src/gmock_main.cc",
+  "file": "/workspaces/BigIntCpp/_deps/googletest-src/googlemock/src/gmock_main.cc",
+  "output": "_deps/googletest-build/googlemock/CMakeFiles/gmock_main.dir/src/gmock_main.cc.o"
+},
+{
+  "directory": "/workspaces/BigIntCpp/_deps/googletest-build/googletest",
+  "command": "/usr/bin/c++  -I/workspaces/BigIntCpp/src/headers -I/workspaces/BigIntCpp/_deps/googletest-src/googletest/include -I/workspaces/BigIntCpp/_deps/googletest-src/googletest -g -std=c++23 -Wall -Wshadow -Wconversion -DGTEST_HAS_PTHREAD=1 -fexceptions -W -Wpointer-arith -Wreturn-type -Wcast-qual -Wwrite-strings -Wswitch -Wunused-parameter -Wcast-align -Wchar-subscripts -Winline -Wredundant-decls -o CMakeFiles/gtest.dir/src/gtest-all.cc.o -c /workspaces/BigIntCpp/_deps/googletest-src/googletest/src/gtest-all.cc",
+  "file": "/workspaces/BigIntCpp/_deps/googletest-src/googletest/src/gtest-all.cc",
+  "output": "_deps/googletest-build/googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o"
+},
+{
+  "directory": "/workspaces/BigIntCpp/_deps/googletest-build/googletest",
+  "command": "/usr/bin/c++  -I/workspaces/BigIntCpp/src/headers -isystem /workspaces/BigIntCpp/_deps/googletest-src/googletest/include -isystem /workspaces/BigIntCpp/_deps/googletest-src/googletest -g -std=c++23 -Wall -Wshadow -Wconversion -DGTEST_HAS_PTHREAD=1 -fexceptions -W -Wpointer-arith -Wreturn-type -Wcast-qual -Wwrite-strings -Wswitch -Wunused-parameter -Wcast-align -Wchar-subscripts -Winline -Wredundant-decls -o CMakeFiles/gtest_main.dir/src/gtest_main.cc.o -c /workspaces/BigIntCpp/_deps/googletest-src/googletest/src/gtest_main.cc",
+  "file": "/workspaces/BigIntCpp/_deps/googletest-src/googletest/src/gtest_main.cc",
+  "output": "_deps/googletest-build/googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o"
+}
+]

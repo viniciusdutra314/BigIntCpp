@@ -13,15 +13,16 @@ namespace views =std::views;
 class BigInteger {
 private:
   vector<uint32_t> digits;
-  bool is_positive;
+  bool is_positive=true;
 
   //Construtor
   BigInteger(const string_view numerical_str) {
-    is_positive = true;
-    auto is_numerical = [](char c) { return isdigit(c); };
-    for (auto chunck_8_digits :
-         views::reverse(numerical_str) | filter(is_numerical) | chunk(8)) {
-      digits.push_back(stol(to<string>(chunck_8_digits)));
+    size_t num_elements=ceil(numerical_str.length()/8.0f);
+    digits.resize(num_elements);
+    for (auto&& [digit,numbers_chunk] : zip(digits,numerical_str | views::reverse | chunk(8))) {
+      digit=0;
+      for (auto [exponent,character] : enumerate(numbers_chunk))
+        digit+=pow(10,exponent)*(character-'0');
     }
   }
   friend BigInteger operator""_bigint(const char *raw_number);
